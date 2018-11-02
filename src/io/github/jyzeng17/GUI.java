@@ -102,27 +102,23 @@ public class GUI implements ActionListener {
 				case UP:
 					cellLabels[zeroPosition].setText(cellLabels[zeroPosition - Puzzle.EDGE_SIZE].getText());
 					zeroPosition = zeroPosition - Puzzle.EDGE_SIZE;
-					cellLabels[zeroPosition].setText("");
-
 					break;
 				case DOWN:
 					cellLabels[zeroPosition].setText(cellLabels[zeroPosition + Puzzle.EDGE_SIZE].getText());
 					zeroPosition = zeroPosition + Puzzle.EDGE_SIZE;
-					cellLabels[zeroPosition].setText("");
 					break;
 				case LEFT:
 					cellLabels[zeroPosition].setText(cellLabels[zeroPosition - 1].getText());
 					--zeroPosition;
-					cellLabels[zeroPosition].setText("");
 					break;
 				case RIGHT:
 					cellLabels[zeroPosition].setText(cellLabels[zeroPosition + 1].getText());
 					++zeroPosition;
-					cellLabels[zeroPosition].setText("");
 					break;
 				default:
 					break;
 			}
+			cellLabels[zeroPosition].setText("");
 
 			if (solutionPlys.size() == 0) {
 				button.setVisible(false);
