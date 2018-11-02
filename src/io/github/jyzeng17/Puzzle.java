@@ -48,7 +48,7 @@ public class Puzzle {
 	}
 
 	// Pass threshold as array to pass by reference
-	public Node testBDFS(PriorityQueue<QueueElement> lastPQ, int[] threshold, HashSet<State> closedStates, HashSet<QueueElement> goalHS) {
+	public Node bDFS(PriorityQueue<QueueElement> lastPQ, int[] threshold, HashSet<State> closedStates, HashSet<QueueElement> goalHS) {
 		QueueElement currentQE;
 		Node nextChild;
 		int nextChildCost;
@@ -119,62 +119,6 @@ public class Puzzle {
 		return null;
 	}
 
-	public Node bDFS(PriorityQueue<QueueElement> lastPQ, int threshold, HashSet<State> closedStates, HashSet<QueueElement> goalHS) {
-		QueueElement currentQE;
-		Node nextChild;
-
-		// Print process information
-		long counter = 0;
-
-		// Initialize priority queue and reset last priority queue
-		PriorityQueue<QueueElement> queue = new PriorityQueue<QueueElement>(lastPQ);
-		lastPQ.clear();
-
-		// While queue is not empty do
-		while (!queue.isEmpty()) {
-			// (current, N) = queue poll
-			currentQE = queue.poll();
-
-			// If path length from rootNode to currentNode's child > threshold
-			if (currentQE.getParent().getPath().getSize() + 1 > threshold) {
-				lastPQ.offer(currentQE);
-				continue;
-			}
-
-			// R = next best child of N (pick best move)
-			nextChild = currentQE.nextBestChild();
-
-			// If R == null => continue (all children of current are searched)
-			if (nextChild == null) {
-				continue;
-			}
-
-			// Offer (R, N) to queue (means R already searched)
-			queue.offer(new QueueElement(currentQE.getCurrentChild() + 1, currentQE.getParent()));
-
-			// If R already in closed states => continue (pruning)
-			if (closedStates.contains(nextChild.getState())) {
-				continue;
-			}
-			closedStates.add(nextChild.getState());
-
-			++counter;
-
-			// If R is ending state
-			if (goalHS.contains(new QueueElement(-1, nextChild))) {
-				System.out.println("ok, " + counter + " state(s) searched. Elapsed time: " + getElapsedTime() + " ms. Size of closedStates: " + closedStates.size());
-				return nextChild;
-			}
-
-			// Offer (null, R) to queue (search deeper)
-			queue.offer(new QueueElement(-1, nextChild));
-		}
-
-		// Print process information
-		System.out.println("ok, " + counter + " state(s) searched. Elapsed time: " + getElapsedTime() + " ms. Size of closedStates: " + closedStates.size());
-		return null;
-	}
-
 	public Node[] bIDAStar() {
 		byte counter = 0;
 
@@ -215,7 +159,7 @@ public class Puzzle {
 			System.out.print("[" + ++counter + "] Forward searching threshold: " + forwardThreshold[0] + "... ");
 
 			// Run forward DFS
-			matchNode = testBDFS(forwardLastPQ, forwardThreshold, forwardClosedStates, new HashSet<QueueElement>(backwardLastPQ));
+			matchNode = bDFS(forwardLastPQ, forwardThreshold, forwardClosedStates, new HashSet<QueueElement>(backwardLastPQ));
 
 			// If solution found
 			if (matchNode != null) {
@@ -229,7 +173,7 @@ public class Puzzle {
 			System.out.print("[" + ++counter + "] Backward searching threshold: " + backwardThreshold[0] + "... ");
 
 			// Run backward DFS
-			matchNode = testBDFS(backwardLastPQ, backwardThreshold, backwardClosedStates, new HashSet<QueueElement>(forwardLastPQ));
+			matchNode = bDFS(backwardLastPQ, backwardThreshold, backwardClosedStates, new HashSet<QueueElement>(forwardLastPQ));
 
 			// If solution found
 			if (matchNode != null) {
