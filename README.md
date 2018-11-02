@@ -1,6 +1,6 @@
 # 15-Puzzle-Solver
 
-* A Java program to solve 15-puzzle with a GUI.
+* A Java program to solve 15-puzzle with a GUI
 
 ## Usage
 
