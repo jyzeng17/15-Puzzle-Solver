@@ -63,7 +63,7 @@ public class Node implements Comparable<Node> {
 			currentIndex[state.get(i)] = i;
 		}
 
-		for (int i = 0; i < Puzzle.SIZE; ++i) {
+		for (int i = 1; i < Puzzle.SIZE; ++i) {
 			cost += distanceBetween(currentIndex[i], endingIndex[i]);
 		}
 
