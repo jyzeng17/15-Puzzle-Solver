@@ -86,6 +86,7 @@ public class GUI implements ActionListener {
 
 					button.setText("Check Solution");
 					button.setVisible(true);
+					System.out.println("\nFinished!");
 				}
 			}.start();
 		}
