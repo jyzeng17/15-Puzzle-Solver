@@ -2,9 +2,14 @@
 
 * A Java program to solve 15-puzzle with a GUI
 
+## Prerequisite
+
+* Oracle/Open JDK 8
+
 ## Usage
 
 * `$ make run`
+	*(if encounter error, run `$ make clean && make` first and run again)
 
 ## Algorithm
 
