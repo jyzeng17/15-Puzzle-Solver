@@ -214,19 +214,29 @@ public class Puzzle {
 		int randomInt;
 		byte[] buffer;
 
-		do {
-			for (Byte b = 0; b < SIZE; ++b) {
-				digits.add(b);
+		for (Byte b = 0; b < SIZE; ++b) {
+			digits.add(b);
+		}
+		buffer = new byte[SIZE];
+		for (int i = SIZE; i > 0; --i) {
+			randomInt = random.nextInt(i);
+			buffer[i - 1] = digits.remove(randomInt).byteValue();
+		}
+		startingState = new State(buffer);
+
+		// Calculate ending state (according to starting state's parity)
+		if (isEvenParity(buffer)) {
+			for (int i = 0; i < buffer.length - 1; ++i) {
+				buffer[i] = (byte)(i + 1);
 			}
-			buffer = new byte[SIZE];
-			for (int i = SIZE; i > 0; --i) {
-				randomInt = random.nextInt(i);
-				buffer[i - 1] = digits.remove(randomInt).byteValue();
+			buffer[buffer.length - 1] = 0;
+		}
+		else {
+			for (int i = 0; i < buffer.length; ++i) {
+				buffer[i] = (byte)(i);
 			}
 		}
-		while (!isEvenParity(buffer));
-
-		startingState = new State(buffer);
+		endingState = new State(buffer);
 	}
 
 	private boolean isEvenParity(byte[] buffer) {
