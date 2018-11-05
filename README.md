@@ -8,8 +8,7 @@
 
 ## Usage
 
-* `$ make run`
-	*(if encounter error, run `$ make clean && make` first and run again)
+* `$ make run` (if encounter error, run `$ make clean && make` first and run again)
 
 ## Algorithm
 
