@@ -45,14 +45,17 @@ public class Puzzle {
 				buffer[i] = (byte)(i + 1);
 			}
 			buffer[buffer.length - 1] = 0;
+			System.out.println("\nBoard Parity: Even");
 		}
 		else {
 			for (int i = 0; i < buffer.length; ++i) {
 				buffer[i] = (byte)(i);
 			}
+			System.out.println("\nBoard Parity: Odd");
 		}
-
 		endingState = new State(buffer);
+
+		System.out.println("\nExpected cost: " + new Node(new Path(), startingState, endingState).getCost());
 	}
 
 	// Pass threshold as array to pass by reference
@@ -238,13 +241,17 @@ public class Puzzle {
 				buffer[i] = (byte)(i + 1);
 			}
 			buffer[buffer.length - 1] = 0;
+			System.out.println("\nBoard Parity: Even");
 		}
 		else {
 			for (int i = 0; i < buffer.length; ++i) {
 				buffer[i] = (byte)(i);
 			}
+			System.out.println("\nBoard Parity: Odd");
 		}
 		endingState = new State(buffer);
+		System.out.println("\nExpected cost: " + new Node(new Path(), startingState, endingState).getCost());
+		System.out.println("");
 	}
 
 	private boolean isEvenParity(byte[] buffer) {
