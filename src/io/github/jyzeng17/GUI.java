@@ -6,7 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.border.MatteBorder;
 import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
@@ -135,7 +137,7 @@ public class GUI implements ActionListener {
 		int height = INFORMATION_LABEL_HEIGHT + Puzzle.EDGE_SIZE * CELL_SIZE + BUTTONS_PANEL_HEIGHT;
 		frame.setSize(width, height);
 
-		frame.setLayout(null);
+		frame.setLayout(new BorderLayout());
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -143,32 +145,20 @@ public class GUI implements ActionListener {
 	private void initializeInformationLabel() {
 		informationLabel = new JLabel("Initialize the puzzle first.");
 
-		int width = Puzzle.EDGE_SIZE * CELL_SIZE;
-		informationLabel.setSize(width, INFORMATION_LABEL_HEIGHT);
-
-		informationLabel.setLocation(MARGIN_WIDTH, 0);
-
 		informationLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		frame.add(informationLabel);
+		informationLabel.setFont(new Font(informationLabel.getFont().getName(), Font.PLAIN, 18));
+
+		frame.add(informationLabel, BorderLayout.NORTH);
 	}
 
 	private void initializePuzzlePanel() {
 		JPanel puzzlePanel = new JPanel();
 
-		int width = Puzzle.EDGE_SIZE * CELL_SIZE;
-		int height = Puzzle.EDGE_SIZE * CELL_SIZE;
-		puzzlePanel.setSize(width, height);
-
-		int x = MARGIN_WIDTH;
-		int y = INFORMATION_LABEL_HEIGHT;
-		puzzlePanel.setLocation(x, y);
-
 		puzzlePanel.setLayout(new GridLayout(Puzzle.EDGE_SIZE, Puzzle.EDGE_SIZE));
 
 		cellLabels = new JLabel[Puzzle.SIZE];
 		for (int i = 0; i < cellLabels.length; ++i) {
-			//cellLabels[i] = new JLabel(((i != cellLabels.length - 1)? Integer.toString(i + 1) : ""));
 			cellLabels[i] = new JLabel("");
 			int top = 1;
 			int left = 1;
@@ -182,29 +172,25 @@ public class GUI implements ActionListener {
 			puzzlePanel.add(cellLabels[i]);
 		}
 
-		frame.add(puzzlePanel);
+		frame.add(puzzlePanel, BorderLayout.CENTER);
 	}
 
 	private void initializeButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
-
-		int panelWidth = Puzzle.EDGE_SIZE * CELL_SIZE;
-		buttonsPanel.setSize(panelWidth, BUTTONS_PANEL_HEIGHT);
-
-		int x = MARGIN_WIDTH;
-		int y = INFORMATION_LABEL_HEIGHT + Puzzle.EDGE_SIZE * CELL_SIZE;
-		buttonsPanel.setLocation(x, y);
 
 		buttonsPanel.setLayout(new GridBagLayout());
 
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		button = new JButton("Initialize");
+
+		button.setFont(new Font(button.getFont().getName(), Font.PLAIN, 18));
+
 		button.addActionListener(this);
 
 		buttonsPanel.add(button, gbc);
 		
-		frame.add(buttonsPanel);
+		frame.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 
 	private void updateStartingState() {
