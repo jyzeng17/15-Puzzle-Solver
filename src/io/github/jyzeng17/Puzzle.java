@@ -40,10 +40,18 @@ public class Puzzle {
 		startingState = new State(buffer);
 
 		// Calculate ending state (according to starting state's parity)
-		for (int i = 0; i < buffer.length - 1; ++i) {
-			buffer[i] = (byte)(i + 1);
+		if (isEvenParity(buffer)) {
+			for (int i = 0; i < buffer.length - 1; ++i) {
+				buffer[i] = (byte)(i + 1);
+			}
+			buffer[buffer.length - 1] = 0;
 		}
-		buffer[buffer.length - 1] = 0;
+		else {
+			for (int i = 0; i < buffer.length; ++i) {
+				buffer[i] = (byte)(i);
+			}
+		}
+
 		endingState = new State(buffer);
 	}
 

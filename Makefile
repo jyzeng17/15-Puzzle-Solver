@@ -6,3 +6,6 @@ clean:
 
 run:
 	java -cp classes/ GUILauncher
+
+test:
+	javac -sourcepath src/ -d classes src/CLILauncher.java && java -cp classes/ CLILauncher

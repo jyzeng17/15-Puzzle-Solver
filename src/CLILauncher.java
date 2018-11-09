@@ -17,6 +17,8 @@ public class CLILauncher {
 		}
 		Puzzle puzzle = new Puzzle(buffer);
 
+		System.out.println("\nExpected cost: " + new Node(new Path(), puzzle.getStartingState(), puzzle.getEndingState()).getCost());
+
 		System.out.println("\n[Start BIDA*]");
 
 		puzzle.startTiming();
@@ -40,6 +42,8 @@ public class CLILauncher {
 		System.out.println("\nTotal number of plys: " + (solution[0].getPath().getSize() + solution[1].getPath().getSize()));
 		solution[0].getPath().print();
 		solution[1].getPath().printReversely();
+
+		System.out.println("\nOriginally expected cost: " + new Node(new Path(), puzzle.getStartingState(), puzzle.getEndingState()).getCost());
 
 		// Print process time
 		System.out.println("\nSearching time: " + elapsedTime + " ms");
