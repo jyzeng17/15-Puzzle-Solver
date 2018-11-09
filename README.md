@@ -6,14 +6,18 @@
 
 * Oracle/Open JDK 8
 
+## Environment
+
+* Ubuntu 16.04 or higher version
+
 ## Usage
 
-* `$ make run` (if encounter error, run `$ make clean && make` first and run again)
+* `$ make && make run`
 
 ## Algorithm
 
 * Searching algorithm: Bidirectional IDA\*
-* Heuristic function: Manhattan distance
+* Heuristic function: current search depth + each tile's Manhattan distance
 
 ## Further Improvements
 
