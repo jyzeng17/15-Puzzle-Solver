@@ -12,7 +12,9 @@
 
 ## Usage
 
-* `$ mkdir classes && make && make run`
+* `$ mkdir classes`: create a directory for class files
+* `$ make`: compile java files
+* `$ make run`: run the program
 
 ## Algorithm
 
