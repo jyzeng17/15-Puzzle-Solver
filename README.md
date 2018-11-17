@@ -12,7 +12,7 @@
 
 ## Usage
 
-* `$ make && make run`
+* `$ mkdir classes && make && make run`
 
 ## Algorithm
 
